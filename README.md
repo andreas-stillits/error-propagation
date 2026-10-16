@@ -1,8 +1,6 @@
-# DatF Mandatory Project - A Monte Carlo Error Propagation Package
+# DatF Mandatory Project - A Monte Carlo Uncertainty Propagation Package
 
-Developed by Andreas Stillits, October 2026 (andreas.stillits@gmail.com)
-
-Version 0.1.0 
+Developed by Andreas Stillits, October 2026 (andreas.stillits@gmail.com) 
 
 ## Content
 
@@ -26,14 +24,14 @@ Over the 4 assignments, they will be introduced to development concepts such as:
 
 ## Overall Story
 
-*"You already solve this problem repeatedly using the error propagation formula. 
+"You already solve this problem repeatedly using the error propagation formula. 
 First, we will see that it can fail, and that MC simulation can both 
 (1) free you of ever differentiating again, and 
-(2) even give you more information, i.e. what are the actual distributions, not just $\mu \pm \sigma$ (A1). 
+(2) even give you more information, i.e. what are the actual distributions, not just $\mu \pm \sigma$ (Part 1). 
 
-Then we automate it with functions (A2). 
+Then we automate it with functions (Part 2). 
 Then we discover that the automation is too rigid. 
 
-Then we redesign it so other people can use and extend it without modifying your source code (A3). 
+Then we redesign it so other people can use and extend it without modifying your source code (Part 3). 
 
-Finally, we make it fast using parallelism (A4)."* 
+Finally, we make it fast using parallelism (Part 4)."
