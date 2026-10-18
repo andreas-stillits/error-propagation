@@ -1,10 +1,10 @@
 """
-Second implementation with functions
+Third implementation with functions
 ___________________________________
 
 - with typing
 - with docstrings
-- no module separation
+- with module separation
 ___________________________________
 
 Basic idea:
@@ -23,6 +23,8 @@ from collections.abc import Callable
 from typing import Any
 
 import numpy as np
+
+from my_package.sources import empirical, normal, poisson
 
 
 def propagate(
@@ -68,19 +70,15 @@ def propagate(
 
             # if normal, pass the mean and std to the rng.normal function
             elif input_type == "normal":
-                value = rng.normal(loc=params[0], scale=params[1])
-                sample.append(value)
+                sample.append(normal(rng, *params))
 
             # if poisson, pass the lambda parameter to the rng.poisson function
             elif input_type == "poisson":
-                value = rng.poisson(lam=params[0])
-                sample.append(value)
+                sample.append(poisson(rng, *params))
 
             # if empirical, sample from the provided data using rng.choice
             elif input_type == "empirical":
-                data = params[0]
-                value = rng.choice(data, replace=True)
-                sample.append(value)
+                sample.append(empirical(rng, *params))
 
             # raise an error if the input type is unknown
             else:
