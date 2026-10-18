@@ -1,9 +1,9 @@
 """
-First implementation with functions
+Second implementation with functions
 ___________________________________
 
-- no typing
-- no docstrings
+- with typing
+- with docstrings
 - no module separation
 ___________________________________
 
@@ -19,13 +19,44 @@ Basic idea:
 
 """
 
+from collections.abc import Callable
+from typing import Any
 
-def propagate(rng, func, inputs, n_samples=1_000):
-    outputs = []
+import numpy as np
+
+
+def propagate(
+    rng: np.random.Generator,
+    func: Callable[..., float],
+    inputs: list[tuple[Any, ...]],
+    n_samples: int = 10_000,
+) -> list[float]:
+    """
+    Propagate uncertainty through a function.
+    Provide a numpy random number generator, a function to propagate, a list of function inputs, and a number of samples to draw.
+
+    Arguments:
+    - rng: a numpy random number generator
+    - func: a function to propagate, which takes a tuple of floats and returns a float
+    - inputs: a list of tuples, where each tuple contains:
+        - a string identifier for the input type ("constant", "normal", "poisson", or "empirical")
+        - the parameters for the input type (e.g., mean and std for normal, lambda for poisson, or a list of values for empirical)
+    - n_samples: the number of samples to draw from the input distributions
+
+    Returns:
+    - a list of floats, which are the outputs of the function for each sample drawn from the input distributions
+
+    Raises:
+    - ValueError: if an unknown input type is provided
+    """
+
+    outputs: list[float] = []
 
     # loop over the number of samples
     for _ in range(n_samples):
-        sample = []  # list to hold the sampled values that goes into func (in order)
+        sample: list[float] = (
+            []
+        )  # list to hold the sampled values that goes into func (in order)
 
         # loop over the inputs and sample values based on the input type
         for input_type, *params in inputs:
