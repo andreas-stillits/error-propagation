@@ -1,5 +1,5 @@
 from my_package.propagation import propagate
 
-all = [
+__all__: list[str] = [
     "propagate",
 ]
