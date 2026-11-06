@@ -20,7 +20,6 @@ Basic idea:
 """
 
 from collections.abc import Callable
-from typing import Any
 
 import numpy as np
 
@@ -30,7 +29,7 @@ from my_package.sources import empirical, normal, poisson
 def propagate(
     rng: np.random.Generator,
     func: Callable[..., float],
-    inputs: list[tuple[Any, ...]],
+    inputs: list[tuple],
     n_samples: int = 10_000,
 ) -> list[float]:
     """
