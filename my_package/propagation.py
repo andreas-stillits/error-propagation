@@ -28,7 +28,9 @@ from my_package.sources import empirical, normal, poisson
 
 def propagate(
     rng: np.random.Generator,
-    func: Callable[..., float],
+    func: Callable[
+        ..., float
+    ],  # no need to demand float as the return type. We put it to practice typing
     inputs: list[tuple],
     n_samples: int = 10_000,
 ) -> list[float]:
@@ -57,15 +59,14 @@ def propagate(
     for _ in range(n_samples):
         sample: list[float] = (
             []
-        )  # list to hold the sampled values that goes into func (in order)
+        )  # list to hold the sampled values that goes into func (in order of arguments)
 
         # loop over the inputs and sample values based on the input type
         for input_type, *params in inputs:
 
             # if constant, just take the value
             if input_type == "constant":
-                value = params[0]
-                sample.append(value)
+                sample.append(params[0])
 
             # if normal, pass the mean and std to the rng.normal function
             elif input_type == "normal":
