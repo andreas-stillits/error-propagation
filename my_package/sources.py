@@ -28,6 +28,17 @@ def poisson(
     return rng.poisson(lam=lam)
 
 
+def uniform(
+    rng: np.random.Generator,
+    low: float,
+    high: float,
+) -> float:
+    """
+    Sample from a uniform distribution with given low and high values.
+    """
+    return rng.uniform(low=low, high=high)
+
+
 def empirical(
     rng: np.random.Generator,
     values: Sequence[float | int],

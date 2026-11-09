@@ -23,7 +23,7 @@ from collections.abc import Callable
 
 import numpy as np
 
-from my_package.sources import empirical, normal, poisson
+from my_package.sources import empirical, normal, poisson, uniform
 
 
 def propagate(
@@ -75,6 +75,10 @@ def propagate(
             # if poisson, pass the lambda parameter to the rng.poisson function
             elif input_type == "poisson":
                 sample.append(poisson(rng, *params))
+
+            # if uniform, pass the low and high parameters to the rng.uniform function   <-- OBS: students add this only in Exercise 4
+            elif input_type == "uniform":
+                sample.append(uniform(rng, *params))
 
             # if empirical, sample from the provided data using rng.choice
             elif input_type == "empirical":
