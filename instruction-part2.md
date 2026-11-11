@@ -26,7 +26,7 @@ MandatoryProject/
 ```
 
 ## Packaging in Python
-A minimal package in python is a folder containing .py files and an additional special `__init__.py` file. This can be empty, and is just telling python that "this is a package". Functions you make in this folder can then be imported into `project-exercises.ipynb` when you later solve exercises.
+A minimal package in python is just a folder containing .py files and an additional special `__init__.py` file. This can be empty, and is just telling python that "this is a package". You can have several .py files and subfolder and these can import functionality from each other. Functions you make within the package folder can then be imported into `project-exercises.ipynb` when you later solve exercises.
 
 > **TASK:**
 > 
@@ -60,7 +60,7 @@ When you import functions from a package, python will create a `__pycache__/` fo
 ## Implementing Monte Carlo Propagation
 You are now ready to actually write the code you want to reuse inside your parallel to `propagation.py`. As a quick reminder, the algorithm we want to implement is the following:
  
-1. **Define uncertain inputs:** for instance two normal distributed variables $X\sim N(\mu_x,\sigma_x)$ and $Y\sim N(\mu_y, \sigma_y)$
+1. **Define uncertain inputs:** for instance two variables, normal and poisson: $X\sim N(\mu_x,\sigma_x)$ and $Y\sim P(\lambda_y)$
 2. **Define a function to propagate the inputs through:** for instance $f(x,y) = x \cdot e^{-y}$
 3. **Draw a lot of random input values:** $(x_1, y_1), (x_2, y_2), \cdots,(x_n,y_n)$
 4. **Compute the function for each input:** get the sampled distribution $f_1, f_2, \cdots, f_n$
@@ -78,8 +78,8 @@ To accomodate scientific reproducibility, your function should take as an argume
 Imagine again a function $f(x,y)$ where $x$ and $y$ are realizations of uncertain variables. Each variable needs a type indication (e.g. is it normal or poisson?) and the parameters needed to specify the distribution. Structure the inputs $f$ needs in a list or dictionary, for example:
 ```python
 inputs = [
-    ("normal", 0.0, 1.0), # X is N(0, 1)
-    ("normal", 1.0, 1.0), # Y is N(1, 1)
+    ("normal", 0.0, 1.0), # X is Normal with mean 0 and sigma 1
+    ("poisson", 1.0), # Y is Poisson with mean 1
 ]
 ```
 Your propagation function can then go through `inputs`, recognize the distributions, and generate the random values it needs using NumPy. 
@@ -114,7 +114,7 @@ from montecarlo.propagation import propagate
 ```
 Go try it out!
 
-#### Optional
+### Optionally
 You can think of the `from montecarlo.propagation ...` as entering the folders you made - telling python where `propagate()` lives. It is the same thing that happens when you type for instance `from numpy.random import ...`. 
 It can however be nice for useself and others using your package that you don't have to worry about that file structure and instead just be able to type: `from montecarlo import propagate`. 
 
