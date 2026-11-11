@@ -23,8 +23,6 @@ from collections.abc import Callable
 
 import numpy as np
 
-from my_package.sources import empirical, normal, poisson, uniform
-
 
 def propagate(
     rng: np.random.Generator,
@@ -70,19 +68,23 @@ def propagate(
 
             # if normal, pass the mean and std to the rng.normal function
             elif input_type == "normal":
-                sample.append(normal(rng, *params))
+                value = rng.normal(loc=params[0], scale=params[1])
+                sample.append(value)
 
             # if poisson, pass the lambda parameter to the rng.poisson function
             elif input_type == "poisson":
-                sample.append(poisson(rng, *params))
+                value = rng.poisson(lam=params[0])
+                sample.append(value)
 
             # if uniform, pass the low and high parameters to the rng.uniform function   <-- OBS: students add this only in Exercise 4
             elif input_type == "uniform":
-                sample.append(uniform(rng, *params))
+                value = rng.uniform(low=params[0], high=params[1])
+                sample.append(value)
 
             # if empirical, sample from the provided data using rng.choice
             elif input_type == "empirical":
-                sample.append(empirical(rng, *params))
+                value = rng.choice(params[0])
+                sample.append(value)
 
             # raise an error if the input type is unknown
             else:
