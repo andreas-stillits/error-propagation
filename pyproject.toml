@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my_package"
+version = "0.1.0"
+description = "Mandatory project for DatF - building a Monte Carlo Uncertainty Propagation Package"
+readme = "README.md"
+requires-python = ">=3.10"
+
+authors = [
+    { name = "Andreas Stillits", email = "andreas.stillits@nbi.ku.dk" },
+]
+
+# dependencies = [
+#     "numpy>=2,<3"
+# ]
+
+[tool.setuptools.packages.find]
+where = ["src"]
