@@ -9,10 +9,10 @@ Lets get rid of the files from part 1. Remember you can always restore them usin
 
 > **TASK:**
 >
-> 1. Delete the `media/` folder and the `error-propagation.ipynb` notebook with your answers. 
->2. Add the change to Git and commit it.
->3. Move in the new `media/` and `data/` folders for Part 2, together with the `project-exercises.ipynb` notebook. 
->4. Add the change to Git and commit it.
+> 1. Delete the `media/` folder and the `error-propagation.ipynb` notebook with your answers. (you can always get them back using Git - they are not gone)
+> 2. Add the change to Git and commit it.
+> 3. Move in the new `media/` and `data/` folders for Part 2, together with the `project-exercises.ipynb` notebook. 
+> 4. Add the change to Git and commit it.
 
 You will use these files to solve exercises using your package. Your folder should now look something like this:
 
@@ -26,13 +26,13 @@ MandatoryProject/
 ```
 
 ## Packaging in Python
-A minimal package in python is just a folder containing .py files and an additional special `__init__.py` file. This can be empty, and is just telling python that "this is a package". You can have several .py files and subfolder and these can import functionality from each other. Functions you make within the package folder can then be imported into `project-exercises.ipynb` when you later solve exercises.
+A minimal package in python is just a folder containing `.py` files and an additional special `__init__.py` file. This can be empty, and is just telling python that "this is a package". You can have several `.py` files and subfolders and these can import functionality from each other. Functions you make within the package folder can then be imported into `project-exercises.ipynb` when you later solve exercises.
 
 > **TASK:**
 > 
 > 1. Create a new folder and give it a name - this will be the name you use when you write `import ...` later.
-> 2. Create an empty file called specifically `__init__.py`
-> 3. Create another .py file and give it a name - for example `propagation.py`
+> 2. Create an empty file called `__init__.py` specifically
+> 3. Create another `.py` file and give it a name - for example `propagation.py`
 > 4. Add and commit these changes to Git. 
 
 You should now have something like this:
@@ -58,14 +58,14 @@ When you import functions from a package, python will create a `__pycache__/` fo
 *(If in doubt, see the [course page](https://trusinalab.github.io/DatF_26_27/guides/git/) for more information)*.
 
 ## Implementing Monte Carlo Propagation
-You are now ready to actually write the code you want to reuse inside your parallel to `propagation.py`. As a quick reminder, the algorithm we want to implement is the following:
+You are now ready to actually write the code you want to reuse inside your version of `propagation.py`. As a quick reminder, the algorithm we want to implement is the following:
  
 1. **Define uncertain inputs:** for instance two variables, normal and poisson: $X\sim N(\mu_x,\sigma_x)$ and $Y\sim P(\lambda_y)$
 2. **Define a function to propagate the inputs through:** for instance $f(x,y) = x \cdot e^{-y}$
 3. **Draw a lot of random input values:** $(x_1, y_1), (x_2, y_2), \cdots,(x_n,y_n)$
 4. **Compute the function for each input:** get the sampled distribution $f_1, f_2, \cdots, f_n$
 
-**What changes** from time to time is **what kinds of inputs** we have and the **specific function $f$** we are computing. Your job is to write a function that takes these as arguments and returns the desired $f$ distribution.
+**What changes** from project to project is **what kinds of inputs** we have and the **specific function $f$** we are computing. Your job is to write a function that takes these as arguments and returns the desired $f$ distribution.
 
 ### Constraints
 While there are lots of different ways this could be implemented, we are going to force you to abide by a few specific choices
@@ -94,8 +94,8 @@ Your propagation function can then go through `inputs`, recognize the distributi
 
 Your implementation should be well documented so it is easy for others and your future self to understand how it works.  Make sure to add:
 - comments throughout your code
-- informative docstrings that makes it easy to know how to use your function without looking at its definition
-- type hinting: your function's arguments and output should have clear type annotation. For type hinting an argument which is itself a function, you can use: `from collections.abc import Callable`. 
+- an informative docstring to your function that makes it easy to know how to use it without looking at its definition
+- type hinting: your function's arguments and output should have clear type annotation. For type hinting an argument which is itself a function, you can use the type `Callable`. Import it from the standard library via: `from collections.abc import Callable`. 
 
 #### Behavior
 
@@ -115,7 +115,7 @@ from montecarlo.propagation import propagate
 Go try it out!
 
 ### Optionally
-You can think of the `from montecarlo.propagation ...` as entering the folders you made - telling python where `propagate()` lives. It is the same thing that happens when you type for instance `from numpy.random import ...`. 
+You can think of the syntax `from montecarlo.propagation ...` as entering the folders you made - telling python where `propagate()` lives. It is the same thing that happens when you type for instance `from numpy.random import ...`. 
 It can however be nice for useself and others using your package that you don't have to worry about that file structure and instead just be able to type: `from montecarlo import propagate`. 
 
 We can achieve this using the `__init__.py` file which has been empty until now. Simply import the propagate function there, and add its name to a special list called `__all__`, for example:
