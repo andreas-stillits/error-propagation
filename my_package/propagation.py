@@ -28,7 +28,7 @@ def propagate(
     rng: np.random.Generator,
     func: Callable[
         ..., float
-    ],  # no need to demand float as the return type. We put it to practice typing
+    ],  # no need to demand float as the return type. We put it to practice typing, alternatively use `Any` from the `typing` module
     inputs: list[tuple],
     n_samples: int = 10_000,
 ) -> list[float]:
@@ -36,19 +36,19 @@ def propagate(
     Propagate uncertainty through a function.
     Provide a numpy random number generator, a function to propagate, a list of function inputs, and a number of samples to draw.
 
-    Arguments:
-    - rng: a numpy random number generator
-    - func: a function to propagate, which takes a tuple of floats and returns a float
-    - inputs: a list of tuples, where each tuple contains:
-        - a string identifier for the input type ("constant", "normal", "poisson", or "empirical")
-        - the parameters for the input type (e.g., mean and std for normal, lambda for poisson, or a list of values for empirical)
-    - n_samples: the number of samples to draw from the input distributions
+    Args:
+        - rng : a numpy random number generator
+        - func : a function to propagate, which takes a tuple of floats and returns a float
+        - inputs : a list of tuples, where each tuple contains:
+            - a string identifier for the input type ("constant", "normal", "poisson", or "empirical")
+            - the parameters for the input type (e.g., mean and std for normal, lambda for poisson, or a list of values for empirical)
+        - n_samples : the number of samples to draw from the input distributions
 
     Returns:
-    - a list of floats, which are the outputs of the function for each sample drawn from the input distributions
+        - a list of floats, which are the outputs of the function for each sample drawn from the input distributions
 
     Raises:
-    - ValueError: if an unknown input type is provided
+        - ValueError : if an unknown input type is provided
     """
 
     outputs: list[float] = []
