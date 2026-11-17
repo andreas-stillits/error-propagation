@@ -1,6 +1,7 @@
-import numpy as np
-from typing import Any
 from collections.abc import Callable, Sequence
+from typing import Any
+
+import numpy as np
 
 
 class Source:
@@ -21,7 +22,8 @@ class Empirical(Source):
         self.value = value
 
     def sample(self, rng: np.random.Generator) -> Any:
-        return rng.choice(self.value)
+        index = rng.integers(0, len(self.value))
+        return self.value[index]
 
 
 class Model(Source):
