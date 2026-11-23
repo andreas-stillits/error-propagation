@@ -1,5 +1,5 @@
 """
-Third implementation with functions
+Implementation with functions
 ___________________________________
 
 - with typing
@@ -12,9 +12,9 @@ Basic idea:
 - define an input as a list of tuples
 - each tuple contains:
     - a type identifier (string)
-    - values/parameters that define the input
+    - values/parameters that define the input distribution
 - the core function runs a loop over the input list
-  and calls the appropriate function based on the identifier
+  and generates appropriate random samples based on the identifier
 - the outputs are finally collected and returned as a list
 
 """
@@ -33,16 +33,15 @@ def propagate(
     n_samples: int = 10_000,
 ) -> list[float]:
     """
-    Propagate uncertainty through a function.
-    Provide a numpy random number generator, a function to propagate, a list of function inputs, and a number of samples to draw.
+    Propagate uncertainty through a function returning floating point values.
 
     Args:
-        - rng : a numpy random number generator
-        - func : a function to propagate, which takes a tuple of floats and returns a float
-        - inputs : a list of tuples, where each tuple contains:
-            - a string identifier for the input type ("constant", "normal", "poisson", or "empirical")
+        rng : a numpy random number generator
+        func : a function to propagate, which takes a tuple of floats and returns a float
+        inputs : a list of tuples, where each tuple contains:
+            - a string identifier for the input type (e.g. "constant", "normal", "poisson", or "empirical")
             - the parameters for the input type (e.g., mean and std for normal, lambda for poisson, or a list of values for empirical)
-        - n_samples : the number of samples to draw from the input distributions
+        n_samples : the number of samples to draw from the input distributions
 
     Returns:
         - a list of floats, which are the outputs of the function for each sample drawn from the input distributions
