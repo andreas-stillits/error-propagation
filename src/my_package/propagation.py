@@ -16,13 +16,13 @@ def propagate(
     Propagates uncertainty through the supplied function by sampling from the input distributions.
 
     Args:
-        rng (np.random.Generator): A random number generator.
-        func (Callable[..., Any]): The function to propagate uncertainty through.
-        inputs (Sequence[Source]): A sequence of Source objects representing the input distributions.
-        n_samples (int, optional): The number of samples to draw from the input distributions. Defaults to 1_000.
+        rng: A random number generator.
+        func: The function to propagate uncertainty through.
+        inputs: A sequence of Source objects representing the input distributions.
+        n_samples: The number of samples to draw from the input distributions. Defaults to 1.000.
 
     Returns:
-        list[Any]: A list of the results of the function applied to the sampled input values.
+        A list of the results of the function applied to the sampled input values.
     """
     # initialize empty container
     results = []
@@ -32,4 +32,4 @@ def propagate(
         ]  # sample from the input distributions - what we acheived is that we just call source.sample(rng) REGARDLESS of its behavior
         result = func(*sampled_inputs)  # evalue the function with the sampled inputs
         results.append(result)  # store the result
-    return results  # return the result
+    return results  # return the results
